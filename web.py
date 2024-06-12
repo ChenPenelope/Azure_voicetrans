@@ -14,6 +14,12 @@ TRANSLATE_KEY = 'b3a256b701fc42b4a01273da192fd092'
 TRANSLATE_ENDPOINT = 'https://api.cognitive.microsofttranslator.com/'
 TRANSLATE_REGION = 'eastus'
 
+# 音檔儲存路徑
+UPLOAD_FOLDER = 'C:/Users/ASUS/Desktop/語音翻譯/voice'  # 或自定義路徑如 '/app/uploads'
+
+# 設置 Flask 的上傳路徑
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 # 語音轉文字函數
 def speech_to_text(audio_data):
     speech_config = speechsdk.SpeechConfig(subscription=SPEECH_KEY, region=SPEECH_REGION)
