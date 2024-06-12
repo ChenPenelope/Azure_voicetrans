@@ -15,7 +15,7 @@ TRANSLATE_ENDPOINT = 'https://api.cognitive.microsofttranslator.com/'
 TRANSLATE_REGION = 'eastus'
 
 # 音檔儲存路徑
-UPLOAD_FOLDER = 'C:/Users/ASUS/Desktop/語音翻譯/voice'  # 或自定義路徑如 '/app/uploads'
+UPLOAD_FOLDER = '/tmp'  # 或自定義路徑如 '/app/uploads'
 
 # 設置 Flask 的上傳路徑
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
