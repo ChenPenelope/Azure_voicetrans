@@ -39,7 +39,7 @@ def translate_text(text, to_lang='zh-Hant'):
     response_json = response.json()
     return response_json[0]['translations'][0]['text']
 
-@app.route('/transcribe', methods=['POST'])
+@app.route('/transcribe' ,methods=['GET', 'POST'])
 def transcribe():
     if 'audio' not in request.files:
         return jsonify({'error': 'No audio file found'}), 400
