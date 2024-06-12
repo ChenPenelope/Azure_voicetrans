@@ -8,11 +8,11 @@ import requests
 app = Flask(__name__)
 
 # 配置 Azure 語音服務和翻譯服務
-SPEECH_KEY = 'your_speech_service_key'
-SPEECH_REGION = 'your_speech_service_region'
-TRANSLATE_KEY = 'your_translate_service_key'
-TRANSLATE_ENDPOINT = 'https://api.cognitive.microsofttranslator.com/translate'
-TRANSLATE_REGION = 'your_translate_service_region'
+SPEECH_KEY = '6ead9d9817a84c4a96440a548778459f'
+SPEECH_REGION = 'eastus'
+TRANSLATE_KEY = 'b3a256b701fc42b4a01273da192fd092'
+TRANSLATE_ENDPOINT = 'https://api.cognitive.microsofttranslator.com/'
+TRANSLATE_REGION = 'eastus'
 
 # 語音轉文字函數
 def speech_to_text(audio_data):
