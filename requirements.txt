@@ -1,0 +1,7 @@
+flask
+azure-cognitiveservices-speech
+requests
+
+
+azure-ai-translation-text==1.0.0b1
+flask
