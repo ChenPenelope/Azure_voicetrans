@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>語音翻譯</title>
+</head>
+<body>
+    <h1>語音翻譯</h1>
+    <button id="recordButton">開始錄音</button>
+    <button id="stopButton" disabled>停止錄音</button>
+    <p id="status"></p>
+    <p>原文: <span id="originalText"></span></p>
+    <p>翻譯: <span id="translatedText"></span></p>
+
+    <script>
+        let mediaRecorder;
+        let audioChunks = [];
+
+        document.getElementById('recordButton').onclick = () => {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream => {
+                    mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder.start();
+                    document.getElementById('status').textContent = '錄音中...';
+                    document.getElementById('recordButton').disabled = true;
+                    document.getElementById('stopButton').disabled = false;
+
+                    mediaRecorder.ondataavailable = e => {
+                        audioChunks.push(e.data);
+                    };
+
+                    mediaRecorder.onstop = async () => {
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                        const formData = new FormData();
+                        formData.append('audio', audioBlob, 'audio.wav');
+
+                        document.getElementById('status').textContent = '上傳中...';
+                        
+                        const response = await fetch('/transcribe', {
+                            method: 'POST',
+                            body: formData
+                        });
+
+                        const result = await response.json();
+                        document.getElementById('status').textContent = '完成';
+                        document.getElementById('originalText').textContent = result.text || '無法識別';
+                        document.getElementById('translatedText').textContent = result.translation || '無法翻譯';
+
+                        document.getElementById('recordButton').disabled = false;
+                        document.getElementById('stopButton').disabled = true;
+                        audioChunks = [];
+                    };
+                });
+        };
+
+        document.getElementById('stopButton').onclick = () => {
+            mediaRecorder.stop();
+            document.getElementById('status').textContent = '錄音已停止';
+        };
+    </script>
+</body>
+</html>
