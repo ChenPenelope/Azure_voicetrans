@@ -13,7 +13,7 @@ TRANSLATE_ENDPOINT = 'https://api.cognitive.microsofttranslator.com/'
 TRANSLATE_REGION = 'eastus'
 
 # 音檔儲存路徑
-UPLOAD_FOLDER = '/tmp'  # 或自定義路徑如 '/app/uploads'
+UPLOAD_FOLDER = './tmp'  # 或自定義路徑如 '/app/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # 語音轉文字函數
@@ -41,7 +41,7 @@ def translate_text(text, to_lang='zh-Hant'):
     response_json = response.json()
     return response_json[0]['translations'][0]['text']
 
-@app.route('/transcribe', methods=['GET','POST'])
+@app.route('/transcribe', methods=['POST'])
 def transcribe():
     if 'audio' not in request.files:
         return jsonify({'error': 'No audio file found'}), 400
