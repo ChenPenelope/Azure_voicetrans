@@ -1,7 +1,5 @@
 flask
-azure-cognitiveservices-speech
 requests
-
-
+moviepy
+azure-cognitiveservices-speech
 azure-ai-translation-text==1.0.0b1
-flask
