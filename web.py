@@ -9,6 +9,7 @@ from azure.ai.translation.text.models import InputTextItem
 app = Flask(__name__, static_folder='static')
 
 # Azure 語音和翻譯服務配置
+#請改成自己的金鑰
 SPEECH_KEY = '6ead9d9817a84c4a96440a548778459f'
 SPEECH_REGION = 'eastus'
 TRANSLATE_KEY = 'b3a256b701fc42b4a01273da192fd092'
