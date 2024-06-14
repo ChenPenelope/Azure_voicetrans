@@ -20,7 +20,7 @@
         document.getElementById('recordButton').onclick = () => {
             navigator.mediaDevices.getUserMedia({ audio: true })
                 .then(stream => {
-                    mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm', audioBitsPerSecond: 16000 , sampleRate: 16000 });
                     mediaRecorder.start();
                     document.getElementById('status').textContent = '錄音中...';
                     document.getElementById('recordButton').disabled = true;
@@ -31,9 +31,9 @@
                     };
 
                     mediaRecorder.onstop = async () => {
-                        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/wemb' });
                         const formData = new FormData();
-                        formData.append('audio', audioBlob, 'audio.wav');
+                        formData.append('audio', audioBlob, 'audio.webm');
 
                         document.getElementById('status').textContent = '上傳中...';
                         
